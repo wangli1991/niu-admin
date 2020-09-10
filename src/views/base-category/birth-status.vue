@@ -1,18 +1,16 @@
 <!--
  * @Author: wangli
  * @Date: 2020-07-20 06:38:17
- * @LastEditors: wangli
- * @LastEditTime: 2020-07-26 19:07:31
+ * @LastEditors: 王利
+ * @LastEditTime: 2020-09-10 16:43:48
 -->
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-button class="filter-item" style="margin-left: 10px;" type="primary" icon="el-icon-edit" @click="handleCreate">
-        新建
-      </el-button>
+      <el-button class="filter-item" style="margin-left: 10px" type="primary" icon="el-icon-edit" @click="handleCreate"> 新建 </el-button>
     </div>
 
-    <el-table :key="tableKey" v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%;">
+    <el-table :key="tableKey" v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
       <el-table-column label="ID" prop="id" align="center" width="80">
         <template slot-scope="{ row }">
           <span>{{ row.id }}</span>
@@ -25,12 +23,8 @@
       </el-table-column>
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="{ row, $index }">
-          <el-button type="primary" size="mini" @click="handleEdit(row)">
-            编辑
-          </el-button>
-          <el-button v-if="row.status != 'deleted'" size="mini" type="danger" @click="handleDelete(row, $index)">
-            删除
-          </el-button>
+          <el-button type="primary" size="mini" @click="handleEdit(row)"> 编辑 </el-button>
+          <el-button v-if="row.status != 'deleted'" size="mini" type="danger" @click="handleDelete(row, $index)"> 删除 </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -61,12 +55,12 @@ export default {
         importance: undefined,
         title: undefined,
         type: undefined,
-        sort: '+id'
+        sort: '+id',
       },
       textMap: {
         update: 'Edit',
-        create: 'Create'
-      }
+        create: 'Create',
+      },
     };
   },
   created() {
@@ -75,7 +69,7 @@ export default {
   methods: {
     getList() {
       this.listLoading = true;
-      getList().then(res => {
+      getList().then((res) => {
         console.log(res);
         if (res.status === 'S') {
           this.list = res.data;
@@ -93,7 +87,7 @@ export default {
       });
     },
     handleEdit() {},
-    handleDelete() {}
-  }
+    handleDelete() {},
+  },
 };
 </script>
