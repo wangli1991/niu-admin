@@ -1,16 +1,13 @@
 <!--
- * @Author: wangli
- * @Date: 2020-07-20 06:38:17
+ * @Author: 王利
+ * @Date: 2020-08-10 14:28:54
  * @LastEditors: 王利
- * @LastEditTime: 2020-09-10 16:43:48
+ * @LastEditTime: 2020-09-11 15:47:50
 -->
 <template>
-  <div class="app-container">
-    <div class="filter-container">
-      <el-button class="filter-item" style="margin-left: 10px" type="primary" icon="el-icon-edit" @click="handleCreate"> 新建 </el-button>
-    </div>
-
-    <el-table :key="tableKey" v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
+  <div class="table-container">
+    <el-table ref="multipleTable" :key="tableKey" v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%" @selection-change="handleSelectionChange">
+      <el-table-column type="selection" width="55"> </el-table-column>
       <el-table-column label="ID" prop="id" align="center" width="80">
         <template slot-scope="{ row }">
           <span>{{ row.id }}</span>
@@ -28,21 +25,15 @@
         </template>
       </el-table-column>
     </el-table>
-
     <pagination v-show="total > 0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
   </div>
 </template>
-
 <script>
-import { getList, fetchPv, createArticle, updateArticle } from '@/api/baseCategory';
-import waves from '@/directive/waves'; // waves directive
-import { parseTime } from '@/utils';
-import Pagination from '@/components/Pagination'; // secondary package based on el-pagination
-
+import { getList, fetchPv, createArticle, updateArticle } from '@/api/baseList';
+import Pagination from '@/components/Pagination';
 export default {
-  name: 'ComplexTable',
+  name: 'VirtualTable',
   components: { Pagination },
-  directives: { waves },
   data() {
     return {
       tableKey: 0,
@@ -78,16 +69,9 @@ export default {
         this.listLoading = false;
       });
     },
-    handleCreate() {
-      this.resetTemp();
-      this.dialogStatus = 'create';
-      this.dialogFormVisible = true;
-      this.$nextTick(() => {
-        this.$refs['dataForm'].clearValidate();
-      });
+    handleSelectionChange(val) {
+      console.log(val);
     },
-    handleEdit() {},
-    handleDelete() {},
   },
 };
 </script>

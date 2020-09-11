@@ -1,43 +1,32 @@
 /*
  * @Author: wangli
  * @Date: 2020-07-19 13:23:29
- * @LastEditors: wangli
- * @LastEditTime: 2020-07-19 23:14:44
- */ 
-import Vue from 'vue'
+ * @LastEditors: 王利
+ * @LastEditTime: 2020-09-11 15:51:43
+ */
+import Vue from 'vue';
+import router from '@/routes';
+import store from '@/store';
+import '@/filters';
+import '@/routes/permission';
+import '@/config/use';
+import Cookies from 'js-cookie';
 
-import Cookies from 'js-cookie'
+import 'normalize.css/normalize.css'; // a modern alternative to CSS resets
 
-import 'normalize.css/normalize.css' // a modern alternative to CSS resets
+import './styles/element-variables.scss';
 
-import Element from 'element-ui'
-import './styles/element-variables.scss'
+import '@/styles/index.scss'; // global css
 
-import '@/styles/index.scss' // global css
+import App from './App';
 
-import App from './App'
-import store from './store'
-import router from './router'
+import './icons'; // icon
 
-import './icons' // icon
-import '@/router/permission' // permission control
-
-import * as filters from './filters' // global filters
-
-Vue.use(Element, {
-  size: Cookies.get('size') || 'medium', // set element-ui default size
-})
-
-// register global utility filters
-Object.keys(filters).forEach(key => {
-  Vue.filter(key, filters[key])
-})
-
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 new Vue({
   el: '#app',
   router,
   store,
-  render: h => h(App)
-})
+  render: (h) => h(App),
+});
